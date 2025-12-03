@@ -1,0 +1,104 @@
+/* Global Styles */
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  background-color: #fce4ec; /* soft pink */
+  color: #4e342e; /* light brown text */
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+header {
+  text-align: center;
+  background-color: #f8bbd0; /* light pink */
+  padding: 40px 0;
+}
+
+
+h1 {
+  font-size: 3em;
+  margin: 0;
+  color: #4e342e;
+}
+
+/* Section Headings */
+.category {
+  padding: 40px 10%;
+}
+
+.category h2 {
+  color: #6d4c41; /* darker brown */
+  border-left: 8px solid #ec407a; /* pink accent */
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
+/* Product Grid */
+.product-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product {
+  background-color: #fff3e0; /* light beige/pinkish */
+  border-radius: 10px;
+  text-align: center;
+  width: calc(25% - 20px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  transition: transform 0.3s ease;
+}
+
+.product:hover {
+  transform: scale(1.05);
+}
+
+.product img {
+  width: 100%;              /* Fill the width of the box */
+  height: 250px;            /* Set a consistent display area */
+  object-fit: contain;      /* Keep full image (no cropping) */
+  background-color: #fff;   /* Optional: white background for empty space */
+  border-radius: 10px;
+  display: block;
+  padding: 5px;             /* Small padding so it looks balanced */
+}
+
+
+
+.name {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.price {
+  color: #e91e63; /* vivid pink for price */
+  margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 800px) {
+  .product {
+    width: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 500px) {
+  .product {
+    width: 100%;
+  }
+}
+
+@media (max-width: 800px) {
+  .product img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 500px) {
+  .product img {
+    height: 180px;
+  }
+}
+

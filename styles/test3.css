@@ -1,0 +1,56 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff1f3; /* light skin-tone/pinkish background */
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 20px;
+}
+
+/* Main heading */
+.main-heading {
+    color: #ff69b4; /* bright pink */
+    text-align: center;
+    margin-top: 40px;
+    font-size: 2.5em;
+    font-weight: bold;    
+   
+}
+
+/* Section container */
+.age-group {
+  margin-bottom: 50px; /* space between each accordion section */
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px 15px;
+  box-shadow: 0 2px 6px rgba(255, 105, 180, 0.15);
+}
+
+/* Section headings */
+.sub-heading {
+  color: #ff69b4; /* pink */
+  font-size: 1.8em;   
+  font-weight: bold;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Lists */
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+/* Emojis styling (optional, to align better) */
+ul li strong {
+    font-weight: bold;
+}

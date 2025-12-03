@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>コスメレビュー | Cosme Review</title>
+  <link rel="stylesheet" href="styles/summer.css">
+</head>
+<body>
+
+  <!-- 🌐 Translate Button -->
+  <div id="translate-container">
+    <button id="translate-btn">🌍 Translate</button>
+    <select id="language-select" class="hidden">
+      <option value="">Select language</option>
+      <option value="ja">日本語 (Japanese)</option>
+      <option value="en">English</option>
+      <option value="my">မြန်မာ (Burmese)</option>
+    </select>
+  </div>
+
+  <!-- 🍒 Top Navigation Bar -->
+<header class="top-header">
+  
+  <!-- Left: Logo -->
+  <div class="nav-left">
+    <span class="logo">🍒 Cherry</span>
+  </div>
+
+
+  <!-- Right: Menu -->
+  <nav class="nav-right">
+    
+    <a href="test2.html">お勧めの化粧品</a>
+    <a href="test3.html">年齢に合ったコスメ</a>
+  </nav>
+
+</header>
+
+  <!-- Google Translate setup -->
+<div id="google_translate_element" style="display:none;"></div>
+<script>
+function googleTranslateElementInit() {
+  if (typeof google !== "undefined" && google.translate) {
+    new google.translate.TranslateElement({
+      pageLanguage: 'ja',
+      includedLanguages: 'en,ja,my',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+}
+</script>
+ <!-- when need to load Google Translate JS -->
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const translateBtn = document.getElementById("translate-btn");
+    const languageSelect = document.getElementById("language-select");
+
+    // show/hide dropdown
+    translateBtn.addEventListener("click", () => {
+      languageSelect.classList.toggle("hidden");
+    });
+
+    // language select
+    languageSelect.addEventListener("change", (e) => {
+      const lang = e.target.value;
+      if (!lang) return;
+      setLanguage(lang);
+    }); 
+
+    function setLanguage(lang) {
+      const cookieValue = "/auto/" + lang;  //lang is means "en","ja","my"
+
+      //✔️ That’s why they wrote both,to make sure ALL browsers can save the cookie correctly.
+      document.cookie = `googtrans=${cookieValue};path=/;domain=${window.location.hostname}`;  //with domain
+      document.cookie = `googtrans=${cookieValue};path=/;`;         //without domain  
+      window.location.reload();  // Page refresh to apply when add new data for translate
+    }
+  });
+</script> 
+
+  
+
+  <h1>💖 Welcome to Cosme Review! ようこそ 💖</h1>
+
+  <div class="All">
+    <div class="hero">
+      <h2>💄 Cosmetics and Beauty</h2>
+      <img src="images/81e7993c22b0a8405501895e77f7cf1b.jpg" alt="Cosmetic Image" class="cosmetic-image">
+
+      <label for="mainAction">アクションを選択してください:</label>
+      <select id="mainAction">
+        <option value="">-- 選んでください --</option>
+        <option value="write">📝 レビューを書く (Write a Review)</option>
+        <option value="read">📖 レビューを見る (Read Reviews)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Right Side Photos -->
+  <div class="right-photos">
+    <img src="images/facebook.png" alt="Photo 1">
+    <img src="images/instagram.png" alt="Photo 2">
+    <img src="images/twitter.png" alt="Photo 3">
+  </div>
+
+  <!-- Review Form Section -->
+  <div id="reviewFormSection" class="form-container hidden">
+    <h2>📝 レビューを投稿する</h2>
+    <form id="reviewForm">
+      <label>カテゴリー:
+        <select id="category" required>
+          <option value="">選択してください</option>
+          <option value="Makeup">メイク</option>
+          <option value="Lipstick">リップスティック</option>
+          <option value="Skin Care">スキンケア</option>
+          <option value="Perfume">香水</option>
+          <option value="Other">その他</option>
+        </select>
+      </label>
+
+      <label>写真 :
+        <input type="file" id="photos" accept="image/*" multiple>
+      </label>
+      <div id="photoPreview" class="photo-preview"></div>
+
+      <label>短い動画 :
+        <input type="file" id="video" accept="video/*">
+      </label>
+
+      <label>化粧品名:
+        <input type="text" id="name" placeholder="例: フェイスクリームA" required>
+      </label>
+
+      <label>製造国:
+        <input type="text" id="country" placeholder="例: 日本" required>
+      </label>
+
+      <label>価格:
+        <input type="number" id="price" placeholder="例: 3000" required>
+      </label>
+
+      <label>購入場所:
+        <input type="text" id="place" placeholder="例: Amazon, 楽天" required>
+      </label>
+
+      <label>評価:
+        <select name="rating" required>
+          <option value="">選択してください</option>
+          <option value="5">★★★★★ とても良い</option>
+          <option value="4">★★★★ 良い</option>
+          <option value="3">★★★ 普通</option>
+          <option value="2">★★ 悪い</option>
+          <option value="1">★ とても悪い</option>
+        </select>
+      </label>
+
+      <label>レビュー内容:</label>
+      <textarea id="review" rows="3" placeholder="使用感やおすすめポイントを入力してください" required></textarea>
+
+      <button type="submit">投稿する</button>
+    </form>
+  </div>
+
+  <!-- Reviews Display Section -->
+  <div id="reviewsSection" class="form-container hidden">
+    <h2>💬 投稿されたレビュー</h2>
+    <label>カテゴリーでフィルター:
+      <select id="filterCategory">
+        <option value="">すべて表示</option>
+        <option value="Makeup">メイク</option>
+        <option value="Lipstick">リップスティック</option>
+        <option value="Skin Care">スキンケア</option>
+        <option value="Perfume">香水</option>
+        <option value="Other">その他</option>
+      </select>
+    </label>
+    <div id="reviewList"></div>
+  </div>
+
+  <!-- ⭐ New Footer like Trustpilot -->
+<footer class="footer">
+  <h3>何をお探しですか？</h3>
+  <div class="footer-links">
+    <a href="https://www.google.co.jp/maps/search/shinbuya+cosmetic+shop/@35.6606475,139.6797664,15z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D" target="_blank">🗺️ Shibuya Cosmetic Shops</a>
+    <a href="https://www.google.co.jp/maps/search/Shinjuku+Cosmetic+Stores/@35.6606418,139.6488664,13z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D" target="_blank">🗺️ Shinjuku Cosmetic Stores</a>
+    <a href="https://www.google.co.jp/maps/search/Ginza+Beauty+Shops/@35.6712661,139.7600407,16z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D" target="_blank">🗺️ Ginza Beauty Shops</a>
+    <a href="https://www.google.com/maps/search/cosmetic+shop+in+osaka/@34.6945462,135.53104,13.5z?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D" target="_blank">🗺️ Osaka Cosmetic Areas</a>
+    <a href="https://www.google.co.jp/maps/search/Korean+Beauty+Stores+Map/@35.6712659,139.7600407,16z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D" target="_blank">🗺️ Korean Beauty Stores Map</a>
+    <a href="https://www.google.co.jp/maps/search/Best+Drugstore+Cosmetics+Map/@35.6712657,139.7600407,16z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D" target="_blank">🗺️ Best Drugstore Cosmetics Map</a>
+  </div>
+
+  <p class="copy">© 2025 Cherry Reviews. All rights reserved.</p>
+</footer>
+
+  <!-- JS -->
+  <script type="module" src="js/index.js"></script>
+
+</body>
+</html>
