@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const photoPreview = document.getElementById("photoPreview");
   const videoInput = document.getElementById("video");
   const filterCategory = document.getElementById("filterCategory");
+  
 
   // --- Overlay for enlarging images ---
   const overlay = document.createElement("div");
@@ -323,8 +324,10 @@ document.addEventListener("DOMContentLoaded", () => {
         el.classList.add('goog-translated');
       });
     }
-  }
+  }  
 });
+
+
 
 
 
