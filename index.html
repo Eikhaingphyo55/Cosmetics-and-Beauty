@@ -60,35 +60,6 @@ function googleTranslateElementInit() {
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
 
 </script>
-
-<!-- <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const translateBtn = document.getElementById("translate-btn");
-    const languageSelect = document.getElementById("language-select");
-
-    // show/hide dropdown
-    translateBtn.addEventListener("click", () => {
-      languageSelect.classList.toggle("hidden");
-    });
-
-    // language select
-    languageSelect.addEventListener("change", (e) => {
-      const lang = e.target.value;
-      if (!lang) return;
-      setLanguage(lang);
-    }); 
-
-    function setLanguage(lang) {
-      const cookieValue = "/auto/" + lang;  //lang is means "en","ja","my"
-
-      //✔️ That’s why they wrote both,to make sure ALL browsers can save the cookie correctly.
-      document.cookie = `googtrans=${cookieValue};path=/;domain=${window.location.hostname}`;  //with domain
-      document.cookie = `googtrans=${cookieValue};path=/;`;         //without domain  
-      window.location.reload();  // Page refresh to apply when add new data for translate
-    }
-  });
-</script>  -->
-
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const translateBtn = document.getElementById("translate-btn");
@@ -123,13 +94,13 @@ function googleTranslateElementInit() {
       document.cookie = `googtrans=${cookieValue}; path=/; domain=${domain}`;
       
       // Set for root domain (helps with some mobile browsers)
-      document.cookie = `googtrans=${cookieValue}; path=/; domain=.${domain}`;
+      // document.cookie = `googtrans=${cookieValue}; path=/; domain=.${domain}`;
 
       // 3. RELOAD with a small delay
       // Mobile phones need this small pause to save the cookie before reloading
       setTimeout(() => {
         window.location.reload(); 
-      }, 500); 
+      }, 1000); 
     }
   });
 </script>  
