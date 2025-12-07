@@ -57,9 +57,11 @@ function googleTranslateElementInit() {
 }
 </script>
  <!-- when need to load Google Translate JS -->
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
 
-<script>
+</script>
+
+<!-- <script>
   document.addEventListener("DOMContentLoaded", () => {
     const translateBtn = document.getElementById("translate-btn");
     const languageSelect = document.getElementById("language-select");
@@ -85,9 +87,52 @@ function googleTranslateElementInit() {
       window.location.reload();  // Page refresh to apply when add new data for translate
     }
   });
-</script> 
+</script>  -->
 
-  
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const translateBtn = document.getElementById("translate-btn");
+    const languageSelect = document.getElementById("language-select");
+
+    // Show/hide dropdown
+    translateBtn.addEventListener("click", () => {
+      languageSelect.classList.toggle("hidden");
+    });
+
+    // Language select
+    languageSelect.addEventListener("change", (e) => {
+      const lang = e.target.value;
+      if (!lang) return;
+      setLanguage(lang);
+    }); 
+
+    function setLanguage(lang) {
+      const cookieValue = "/auto/" + lang; 
+      const domain = window.location.hostname;
+
+      // 1. CLEAR old cookies to prevent conflicts
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain}`;
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${domain}`;
+
+      // 2. SET new cookie (Aggressive method for Mobile)
+      // Set for current path
+      document.cookie = `googtrans=${cookieValue}; path=/;`;
+      
+      // Set for domain
+      document.cookie = `googtrans=${cookieValue}; path=/; domain=${domain}`;
+      
+      // Set for root domain (helps with some mobile browsers)
+      document.cookie = `googtrans=${cookieValue}; path=/; domain=.${domain}`;
+
+      // 3. RELOAD with a small delay
+      // Mobile phones need this small pause to save the cookie before reloading
+      setTimeout(() => {
+        window.location.reload(); 
+      }, 500); 
+    }
+  });
+</script>  
 
   <h1>💖 Welcome to Cosme Review! ようこそ 💖</h1>
 
@@ -141,19 +186,19 @@ function googleTranslateElementInit() {
       </label>
 
       <label>製造国:
-        <input type="text" id="country" placeholder="例: 日本" required>
+        <input type="text" id="country" placeholder="例: 日本" >
       </label>
 
       <label>価格:
-        <input type="number" id="price" placeholder="例: 3000" required>
+        <input type="number" id="price" placeholder="例: 3000" >
       </label>
 
       <label>購入場所:
-        <input type="text" id="place" placeholder="例: Amazon, 楽天" required>
+        <input type="text" id="place" placeholder="例: Amazon, 楽天" >
       </label>
 
       <label>評価:
-        <select name="rating" required>
+        <select name="rating" id="rating" required>
           <option value="">選択してください</option>
           <option value="5">★★★★★ とても良い</option>
           <option value="4">★★★★ 良い</option>
@@ -165,7 +210,16 @@ function googleTranslateElementInit() {
 
       <label>レビュー内容:</label>
       <textarea id="review" rows="3" placeholder="使用感やおすすめポイントを入力してください" required></textarea>
-
+      
+      <!-- ✨ START NEW ADDITION ✨ -->
+      <hr style="border: 0; border-top: 1px dashed #f5a3b9; margin: 20px 0;">
+      
+      <h3>📬 詳細については私に連絡してください</h3>
+      <label>Instagram (ユーザーネームまたはURL):
+        <input type="text" id="instagram" placeholder="例: @my_beauty_account">
+      </label>
+      <!-- ✨ END NEW ADDITION ✨ -->
+      
       <button type="submit">投稿する</button>
     </form>
   </div>
@@ -173,8 +227,8 @@ function googleTranslateElementInit() {
   <!-- Reviews Display Section -->
   <div id="reviewsSection" class="form-container hidden">
     <h2>💬 投稿されたレビュー</h2>
-    <label>カテゴリーでフィルター:
-      <select id="filterCategory">
+    <label style="font-weight: bold; display: block; margin-bottom: 25px; color: #a63c74;">カテゴリーでフィルター:
+      <select id="filterCategory" style="margin-top: 5px;">
         <option value="">すべて表示</option>
         <option value="Makeup">メイク</option>
         <option value="Lipstick">リップスティック</option>

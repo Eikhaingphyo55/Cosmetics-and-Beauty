@@ -176,9 +176,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const country = document.getElementById("country").value;
     const price = document.getElementById("price").value;
     const place = document.getElementById("place").value;
-    const rating = reviewForm.querySelector("select[name='rating']").value;
+    // const rating = reviewForm.querySelector("select[name='rating']").value;
+    // Change this line to use getElementById
+    const rating = document.getElementById("rating").value;
     const reviewText = document.getElementById("review").value;
     const category = document.getElementById("category").value;
+    
+    // ✨ Capture Instagram Input
+    const instagram = document.getElementById("instagram").value;
 
     try {
       const storage = getStorage();
@@ -197,8 +202,17 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       await addDoc(collection(db, "reviews"), {
-        name, country, price, place, rating: Number(rating),
-        reviewText, category, photoURLs, videoURL, createdAt: serverTimestamp()
+        name, 
+        country, 
+        price, 
+        place, 
+        rating: Number(rating),
+        reviewText, 
+        category, 
+        photoURLs, 
+        videoURL, 
+        instagram, // ✨ Save to database
+        createdAt: serverTimestamp()
       });
 
       alert("✅ レビューを保存しました！");
@@ -298,6 +312,37 @@ document.addEventListener("DOMContentLoaded", () => {
           div.appendChild(video);
         }
 
+        // ✨ INSTAGRAM SECTION (UPDATED) ✨
+        if (data.instagram && data.instagram.trim() !== "") {
+          const instaSection = document.createElement("div");
+          instaSection.className = "insta-section"; // Uses CSS class
+
+          // 1. Label: Bold & Japanese
+          const pContact = document.createElement("strong"); 
+          pContact.style.color = "#a63c74"; // Theme color
+          pContact.innerText = "投稿者に連絡する: "; // Japanese text
+          instaSection.appendChild(pContact);
+
+          // 2. The Link: Image Only (No text)
+          const aInsta = document.createElement("a");
+          aInsta.className = "insta-link";
+          aInsta.target = "_blank";
+          aInsta.rel = "noopener";
+          
+          let link = data.instagram.trim();
+          if (!link.startsWith("http")) {
+            const cleanName = link.replace("@", ""); 
+            link = `https://www.instagram.com/${cleanName}`;
+          }
+          aInsta.href = link;
+
+          // Insert the Instagram Image Only
+          aInsta.innerHTML = '<img src="images/instagram.png" alt="Instagram" class="insta-icon-img">';
+          
+          instaSection.appendChild(aInsta);
+          div.appendChild(instaSection);
+        }
+
         reviewList.appendChild(div);
       });
 
@@ -326,8 +371,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }  
 });
-
-
-
-
-

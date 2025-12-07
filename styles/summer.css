@@ -9,7 +9,8 @@ body {
   padding-top: 70px; /* Space for fixed header */
   font-family: "Segoe UI", sans-serif;
   background-color: #fff9fb;
-  background-image: url('images/cosmetics-background.jpg');
+  /* background-image: url('images/cosmetics-background.jpg'); */
+   background-image: url('../images/cosmetics-background.jpg'); 
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -134,7 +135,7 @@ h1 {
 /* ========== HERO SECTION ========== */
 .hero {
   width: 90%;
-  max-width: 880px;
+  max-width: 900px;
   margin: 0 auto 20px auto;
   padding: 30px; /* Removed the 300px padding */
   text-align: center;
@@ -281,35 +282,9 @@ form button {
 .footer-links a {
   text-decoration: none;
   color: #444;
-  background: rgba(255,255,255,0.3);  
-  padding: 8px 12px;       /* Bigger touch target */
-  border-radius: 8px;      /* Smoother corners */
-  margin: 5px;             /* Space between buttons */
-  display: inline-block;   /* Keeps padding correct on all devices */
-  transition: all 0.3s ease; /* Smooth animation */
-  font-weight: 600;
-  
-}
-
-/* Optional: Add a hover effect */
-.footer-links a:hover {
-  background-color: #ffffff;
-  color: #ff488e;
-  transform: translateY(-2px); /* Moves up slightly when hovered */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-/* Make sure the copy text is styled nicely */
-.copy {
-  margin-top: 25px;
-  font-size: 15px;
-  color: black;
-}
-
-/* Extra styling for the name if you want it to pop */
-.copy b {
-  font-weight: 800;
-  color: #d63384; /* Optional: Makes the name a darker pink */
+  background: rgba(255,255,255,0.3);
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 /* ========== DESKTOP LAYOUT (Media Query) ========== */
@@ -379,4 +354,38 @@ form button {
   }
 }
 
+
+/* ========== INSTAGRAM CONTACT LINK ========== */
+.insta-section {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px dashed #f5a3b9;
+  display: flex;
+  align-items: center; /* Aligns text and icon vertically */
+  gap: 10px;
+}
+
+.insta-link {
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  text-decoration: none;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+.insta-link:hover {
+  transform: scale(1.1); /* Slight zoom on hover */
+  background: none;      /* No background color */
+  box-shadow: none;      /* No shadow box */
+}
+
+/* Style for the image logo */
+.insta-icon-img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  vertical-align: middle;
+}
 
